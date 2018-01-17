@@ -27,3 +27,4 @@ D:\Work\UserStories.WEB\UserStories.DAL\bin\Debug\Microsoft.AspNet.Identity.Enti
 D:\Work\UserStories.WEB\UserStories.DAL\obj\Debug\UserStories.DAL.csproj.CoreCompileInputs.cache
 D:\Work\UserStories.WEB\UserStories.DAL\obj\Debug\UserStories.DAL.dll
 D:\Work\UserStories.WEB\UserStories.DAL\obj\Debug\UserStories.DAL.pdb
+D:\Work\Work\UserStories.WEB\UserStories.DAL\obj\Debug\UserStories.DAL.csproj.CoreCompileInputs.cache

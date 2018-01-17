@@ -113,3 +113,5 @@ D:\Work\UserStories.WEB\UserStories.WEB\bin\Autofac.dll
 D:\Work\UserStories.WEB\UserStories.WEB\bin\Autofac.Integration.Mvc.dll
 D:\Work\UserStories.WEB\UserStories.WEB\bin\Autofac.xml
 D:\Work\UserStories.WEB\UserStories.WEB\bin\Autofac.Integration.Mvc.xml
+D:\Work\Work\UserStories.WEB\UserStories.WEB\obj\Debug\UserStories.WEB.csprojResolveAssemblyReference.cache
+D:\Work\Work\UserStories.WEB\UserStories.WEB\obj\Debug\UserStories.WEB.csproj.CoreCompileInputs.cache

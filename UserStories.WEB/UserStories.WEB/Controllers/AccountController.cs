@@ -82,12 +82,11 @@ namespace UserStories.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-         ApplicationUser user = new ApplicationUser();
-           
+        
             if (ModelState.IsValid)
             {
                
-                OperationDetails operationDetails = await _userService.Create(user);
+                OperationDetails operationDetails = await _userService.Create(new ApplicationUser{});
                 if (operationDetails.Succedeed)
                     return RedirectToAction("Index", "Home");
                 else

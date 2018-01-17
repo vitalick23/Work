@@ -34,3 +34,5 @@ D:\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.csprojResolveA
 D:\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.csproj.CoreCompileInputs.cache
 D:\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.dll
 D:\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.pdb
+D:\Work\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.csprojResolveAssemblyReference.cache
+D:\Work\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.csproj.CoreCompileInputs.cache
