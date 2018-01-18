@@ -54,48 +54,53 @@ namespace UserStories.BLL.Services
         }
        
 
-        public async Task Create(ApplicationUser applicationUser,string password)
+        public bool Create(string email,string password)
         {
-            if (applicationUser != null)
-            {
-                ApplicationUser user = _applicationUserManager.FindByEmail(applicationUser.Email);
-                if (user == null)
-                {
-                    user = new ApplicationUser {Email = user.Email, UserName = user.Email};
-                    var result = _applicationUserManager.CreateUsers(user,password);
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password)) return false;
 
-                    ClientProfile clientProfile =
-                        new ClientProfile
+            ApplicationUser user = _applicationUserManager.FindByEmail(email);
+                if (user != null)
+                {
+                    user = new ApplicationUser {Email = email, UserName = email};
+                    if (_applicationUserManager.CreateUsers(user, password))
+                    {
+                        clientManager.Create(new ClientProfile
                         {
                             Id = user.Id,
-                            Adress = applicationUser.clientProfile.Adress,
-                            Name = applicationUser.clientProfile.Adress
-                        };
-                    clientManager.Create(clientProfile);
-                    await Database.SaveAsync();
+                            Adress = email,
+                            Name = email
+                        });
+                        try
+                        {
+                            Database.SaveAsync();
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            return false;
+                        }
+                    }
                 }
-            }
-        }
 
-        
+            return false;
+        }
 
         public Task SetInitialData(ApplicationUser adminDto, List<string> roles)
         {
             throw new NotImplementedException();
         }
-
-        //public async Task SetInitialData(ApplicationUser adminDto, List<string> roles)
-        //{
-        //    foreach (string roleName in roles)
-        //    {
-        //        var role = await Database.RoleManager.FindByNameAsync(roleName);
-        //        if (role == null)
-        //        {
-        //            role = new ApplicationRole { Name = roleName };
-        //            await Database.RoleManager.CreateAsync(role);
-        //        }
-        //    }
-        //    await Create(adminDto);
-        //}
     }
+    //public async Task SetInitialData(ApplicationUser adminDto, List<string> roles)
+    //{
+    //    foreach (string roleName in roles)
+    //    {
+    //        var role = await Database.RoleManager.FindByNameAsync(roleName);
+    //        if (role == null)
+    //        {
+    //            role = new ApplicationRole { Name = roleName };
+    //            await Database.RoleManager.CreateAsync(role);
+    //        }
+    //    }
+    //    await Create(adminDto);
+    //}  
 }

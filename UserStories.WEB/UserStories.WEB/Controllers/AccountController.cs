@@ -87,7 +87,7 @@ namespace UserStories.WEB.Controllers
             {
                 ApplicationUser user = (ApplicationUser)model;
                // var user = new ApplicationUser();
-                _userService.Create(user,model.Password);
+                _userService.Create(user.Email,model.Password);
                  return RedirectToAction("Index", "Home");
            }
             return View(model);

@@ -16,6 +16,6 @@ namespace UserStories.BLL.Interfaces
         ClaimsIdentity CreateIdentity(ApplicationUser user, string applicationType);
 
         ApplicationUser FindByEmail(string email);
-        bool CreateUsers(ApplicationUser email, string password);
+        bool CreateUsers(ApplicationUser user, string password);
     }
 }

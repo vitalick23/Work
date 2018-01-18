@@ -17,7 +17,7 @@ namespace UserStories.DAL.Repositories
 
         public void Create(ClientProfile item)
         {
-            Database.ClientProfiles.Add(item);           
+                     
         }
 
         public void Dispose()

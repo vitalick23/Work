@@ -32,16 +32,13 @@ namespace UserStories.WEB
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<IUnitOfWork>().As<IdentityUnitOfWork>();
+            builder.RegisterType<IdentityUnitOfWork>().As<IUnitOfWork>();
             builder.RegisterType<ApplicationContext>();
-            builder.RegisterType<IUserService>().As<UserService>();
             builder.RegisterType<StoriesServise>().As<IStoriesSevises>();
-            builder.RegisterType<IStoriesSevises>().As<StoriesServise>();
-            builder.RegisterType<IClientManager>().As<ClientManager>();
-            builder.RegisterType<IApplicationUserManager>().As<ApplicationUserManager>();
+            builder.RegisterType<ClientManager>().As<IClientManager>();
             builder.RegisterType<ApplicationUserManager>().As<IApplicationUserManager>();
             builder.RegisterType<ApplicationRoleManager>().As<IApplicationRoleManager>();
-            builder.RegisterType<IApplicationRoleManager>().As<ApplicationRoleManager>();
+            builder.RegisterType<UserService>().As<IUserService>();
 
 
 

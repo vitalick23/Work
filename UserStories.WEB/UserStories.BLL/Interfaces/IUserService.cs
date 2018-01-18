@@ -11,7 +11,7 @@ namespace UserStories.BLL.Interfaces
 {
     public interface IUserService :IDisposable
     {
-        Task Create(ApplicationUser user, string password);
+        bool Create(string email, string password);
         ClaimsIdentity Authenticate(ApplicationUser userDto);
         Task SetInitialData(ApplicationUser adminDto, List<string> roles);
     }
