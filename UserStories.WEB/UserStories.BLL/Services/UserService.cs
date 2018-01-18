@@ -14,10 +14,19 @@ namespace UserStories.BLL.Services
 {
     public class UserService: IUserService
     {
+        private readonly IApplicationRoleManager _rolemanegr;
         IUnitOfWork Database { get; set; }
+        public IApplicationUserManager _applicationUserManager;
+        private IClientManager clientManager;
 
-        public UserService(IUnitOfWork uow)
+        public UserService(IUnitOfWork uow, 
+            IApplicationRoleManager rolemanegr,
+            IApplicationUserManager applicationUserManager,
+            IClientManager clientManager)
         {
+            _rolemanegr = rolemanegr;
+            _applicationUserManager = applicationUserManager;
+            this.clientManager = clientManager;
             Database = uow;
         }
 
@@ -28,58 +37,53 @@ namespace UserStories.BLL.Services
 
 
 
-        public async Task<ClaimsIdentity> Authenticate(ApplicationUser userDto)
+        public Task<ClaimsIdentity> Authenticate(ApplicationUser userDto)
         {
             ClaimsIdentity claim = null;
-            ApplicationUser user = await Database.UserManager.FindAsync(userDto.Email, userDto.PasswordHash);
+            ApplicationUser user = _applicationUserManager.FindUser(userDto.Email, userDto.PasswordHash); //await Database.UserManager.FindAsync(userDto.Email, userDto.PasswordHash);
             if (user != null)
-                claim = await Database.UserManager.CreateIdentityAsync(user,
-                    DefaultAuthenticationTypes.ApplicationCookie);
+                claim = _applicationUserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie); //await Database.UserManager.CreateIdentityAsync(user,
+                    //DefaultAuthenticationTypes.ApplicationCookie);
             return claim;
         }
-        public async Task SetInitialData(ApplicationUser adminDto, List<string> roles)
-        {
-            foreach (string roleName in roles)
-            {
-                var role = await Database.RoleManager.FindByNameAsync(roleName);
-                if (role == null)
-                {
-                    role = new ApplicationRole { Name = roleName };
-                    await Database.RoleManager.CreateAsync(role);
-                }
-            }
-            await Create(adminDto);
-        }
+        //public async Task SetInitialData(ApplicationUser adminDto, List<string> roles)
+        //{
+        //    foreach (string roleName in roles)
+        //    {
+        //        var role = await Database.RoleManager.FindByNameAsync(roleName);
+        //        if (role == null)
+        //        {
+        //            role = new ApplicationRole { Name = roleName };
+        //            await Database.RoleManager.CreateAsync(role);
+        //        }
+        //    }
+        //    await Create(adminDto);
+        //}
 
-        public async Task<OperationDetails> Create(ApplicationUser applicationUser)
+        public async Task Create(ApplicationUser applicationUser,string password)
         {
-            try
-            {
-                ApplicationUser user = await Database.UserManager.FindByEmailAsync(applicationUser.Email);
+
+                ApplicationUser user = _applicationUserManager.FindByEmail(applicationUser.Email);
                 if (user == null)
                 {
                     user = new ApplicationUser {Email = user.Email, UserName = user.Email};
-                    var result = await Database.UserManager.CreateAsync(user, applicationUser.PasswordHash);
-                    if (result.Errors.Count() > 0)
-                        return new OperationDetails(false, result.Errors.FirstOrDefault(), "");
-
+                    var result = _applicationUserManager.CreateUsers(user, password); //await Database.UserManager.CreateAsync(user, applicationUser.PasswordHash);
                     //await Database.UserManager.AddToRoleAsync(user.Id, applicationUser.Roles.);
 
                     ClientProfile clientProfile =
                         new ClientProfile {Id = user.Id, Adress = applicationUser.clientProfile.Adress, Name = applicationUser.clientProfile.Adress};
-                    Database.ClientManager.Create(clientProfile);
+                    clientManager.Create(clientProfile);
                     await Database.SaveAsync();
-                    return new OperationDetails(true, "Регистрация успешно пройдена", "");
                 }
-                else
-                {
-                    return new OperationDetails(false, "Пользователь с таким логином уже существует", "Email");
-                }
-            }
-            catch (Exception ex)
-            {
-                return new OperationDetails(false,ex.Message);
-            }
         }
+
+        
+
+        public Task SetInitialData(ApplicationUser adminDto, List<string> roles)
+        {
+            throw new NotImplementedException();
+        }
+
+       
     }
 }

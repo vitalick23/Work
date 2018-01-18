@@ -6,27 +6,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using UserStories.BLL.EF;
 using UserStories.BLL.Entities;
-using UserStories.BLL.Identity;
+using UserStories.BLL.Interfaces;
 using UserStories.BLL.Interfase;
-
 
 namespace UserStories.BLL.Repositories
 {
     public class IdentityUnitOfWork : IUnitOfWork
     {
         private ApplicationContext db;
-        private ApplicationUserManager userManager;
-        private ApplicationRoleManager roleManager;
-        private ClientManager clientManager;
-        private StoriesManager storiesManager;
+        private IApplicationUserManager userManager;
+        private IApplicationRoleManager roleManager;
+        private IClientManager clientManager;
+        private IStoriesManager storiesManager;
 
-        public IdentityUnitOfWork(ApplicationContext applicationContext)
+        public IdentityUnitOfWork(ApplicationContext applicationContext,
+            IApplicationRoleManager roleManager,
+            IApplicationUserManager userManager,
+            IClientManager clientManager,
+            IStoriesManager storiesManager)
         {
             db = applicationContext;
-            roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
-            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
-            clientManager = new ClientManager(db);
-            storiesManager = new StoriesManager(db);
+            this.roleManager = roleManager;
+            this.userManager = userManager;
+            this.clientManager = clientManager;
+            this.storiesManager = storiesManager;
+            // storiesManager = new StoriesManager(db);
         }
 
         public async Task SaveAsync()
@@ -34,7 +38,7 @@ namespace UserStories.BLL.Repositories
             await db.SaveChangesAsync();
         }
 
-        public ApplicationUserManager UserManager
+       public IApplicationUserManager UserManager
         {
             get { return userManager; }
         }
@@ -48,18 +52,21 @@ namespace UserStories.BLL.Repositories
         {
             get { return storiesManager; }
         }
-
-        public ApplicationRoleManager RoleManager
+        
+        public IApplicationRoleManager RoleManager
         {
             get { return roleManager; }
         }
+
+     
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);
             userManager.Dispose();
             roleManager.Dispose();
             clientManager.Dispose();
-            storiesManager.Dispose();
+            //storiesManager.Dispose();
         }
     }
 }

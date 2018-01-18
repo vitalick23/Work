@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserStories.BLL.Identity;
+using Microsoft.AspNet.Identity;
+using UserStories.BLL.Interfaces;
 
 namespace UserStories.BLL.Interfase
 {
     public interface IUnitOfWork :IDisposable
     {
-        ApplicationUserManager UserManager { get; }
+        //IUserStore<UserManager<>>
+        //ApplicationUserManager UserManager { get; }
         IClientManager ClientManager { get; }
-        ApplicationRoleManager RoleManager { get; }
+        IApplicationRoleManager RoleManager { get; }
+        IApplicationUserManager UserManager { get; }
         IStoriesManager StoriesManager { get; }
         Task SaveAsync();
     }

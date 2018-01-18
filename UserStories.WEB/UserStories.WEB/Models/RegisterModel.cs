@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using UserStories.BLL.Entities;
 
 namespace UserStories.WEB.Models
 {
@@ -23,5 +24,13 @@ namespace UserStories.WEB.Models
         public string Name { get; set; }
 
         public string Role { get; set; }
+
+        public static explicit operator ApplicationUser(RegisterModel model)
+        {
+            var user = new ApplicationUser();
+            user.clientProfile.Adress = model.Address;
+            user.clientProfile.Name = model.Name;
+            return user;
+        }
     }
 }

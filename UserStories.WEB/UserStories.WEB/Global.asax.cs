@@ -7,7 +7,10 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Microsoft.AspNet.Identity;
 using UserStories.BLL.EF;
+using UserStories.BLL.Entities;
+using UserStories.BLL.Identity;
 using UserStories.BLL.Interfaces;
 using UserStories.BLL.Interfase;
 using UserStories.BLL.Repositories;
@@ -29,11 +32,18 @@ namespace UserStories.WEB
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<IdentityUnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterType<IUnitOfWork>().As<IdentityUnitOfWork>();
             builder.RegisterType<ApplicationContext>();
-            builder.RegisterType<UserService>().As<IUserService>();
+            builder.RegisterType<IUserService>().As<UserService>();
             builder.RegisterType<StoriesServise>().As<IStoriesSevises>();
-            builder.RegisterType<ClientManager>().As<IClientManager>();
+            builder.RegisterType<IStoriesSevises>().As<StoriesServise>();
+            builder.RegisterType<IClientManager>().As<ClientManager>();
+            builder.RegisterType<IApplicationUserManager>().As<ApplicationUserManager>();
+            builder.RegisterType<ApplicationUserManager>().As<IApplicationUserManager>();
+            builder.RegisterType<ApplicationRoleManager>().As<IApplicationRoleManager>();
+            builder.RegisterType<IApplicationRoleManager>().As<ApplicationRoleManager>();
+
+
 
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -61,14 +61,14 @@
     <Compile Include="Repositories\StoriesManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\UserStories.BLL\UserStories.BLL.csproj">
       <Project>{9b119832-42b0-410a-b82e-512d2d011d1d}</Project>
       <Name>UserStories.BLL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfase\" />

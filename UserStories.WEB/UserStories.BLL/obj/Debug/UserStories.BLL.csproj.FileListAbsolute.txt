@@ -36,3 +36,16 @@ D:\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.dll
 D:\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.pdb
 D:\Work\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.csprojResolveAssemblyReference.cache
 D:\Work\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.csproj.CoreCompileInputs.cache
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\UserStories.BLL.dll.config
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\UserStories.BLL.dll
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\UserStories.BLL.pdb
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\EntityFramework.dll
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\EntityFramework.xml
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Work\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.dll
+D:\Work\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.pdb

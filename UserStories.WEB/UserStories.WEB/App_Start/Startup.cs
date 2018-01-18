@@ -15,7 +15,7 @@ public class Startup
         IServiceCreator serviceCreator = new ServiceCreator();
         public void Configuration(IAppBuilder app)
         {
-            app.CreatePerOwinContext<IUserService>(CreateUserService);
+           // app.CreatePerOwinContext<IUserService>(CreateUserService);
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
@@ -23,9 +23,6 @@ public class Startup
             });
         }
 
-        private IUserService CreateUserService()
-        {
-            return serviceCreator.CreateUserService(new ApplicationContext());
-        }
+        
     }
 }

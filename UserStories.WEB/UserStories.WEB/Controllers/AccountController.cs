@@ -85,13 +85,11 @@ namespace UserStories.WEB.Controllers
         
             if (ModelState.IsValid)
             {
-               
-                OperationDetails operationDetails = await _userService.Create(new ApplicationUser{});
-                if (operationDetails.Succedeed)
-                    return RedirectToAction("Index", "Home");
-                else
-                    ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
-            }
+                ApplicationUser user = (ApplicationUser)model;
+               // var user = new ApplicationUser();
+                _userService.Create(user,model.Password);
+                return RedirectToAction("Index", "Home");
+           }
             return View(model);
         }
         //private async Task SetInitialDataAsync()
