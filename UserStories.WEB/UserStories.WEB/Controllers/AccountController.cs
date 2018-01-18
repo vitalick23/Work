@@ -6,9 +6,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebSockets;
 using Microsoft.AspNet.Identity.Owin;
 using UserStories.BLL.DTO;
-using UserStories.BLL.Infrastructure;
 using UserStories.BLL.Interfaces;
 using UserStories.BLL.Services;
 using UserStories.WEB.Models;
@@ -49,7 +49,7 @@ namespace UserStories.WEB.Controllers
                 ApplicationUser user = new ApplicationUser();
                                 
                 RegisterModel userDto = new RegisterModel { Email = model.Email, Password = model.Password };
-                ClaimsIdentity claim = await _userService.Authenticate(user);
+                ClaimsIdentity claim =  _userService.Authenticate(user);
                 if (claim == null)
                 {
                     ModelState.AddModelError("", "Неверный логин или пароль.");
@@ -82,13 +82,13 @@ namespace UserStories.WEB.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-        
+
             if (ModelState.IsValid)
             {
                 ApplicationUser user = (ApplicationUser)model;
                // var user = new ApplicationUser();
                 _userService.Create(user,model.Password);
-                return RedirectToAction("Index", "Home");
+                 return RedirectToAction("Index", "Home");
            }
             return View(model);
         }

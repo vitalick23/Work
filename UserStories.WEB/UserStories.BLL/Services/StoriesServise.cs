@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using UserStories.BLL.DTO;
 using UserStories.BLL.Entities;
-using UserStories.BLL.Infrastructure;
 using UserStories.BLL.Interfaces;
 using UserStories.BLL.Interfase;
 
@@ -25,7 +24,7 @@ namespace UserStories.BLL.Services
             Database.Dispose();
         }
 
-        public async Task<OperationDetails> Create(Stories storiesDto)
+        public async Task<bool> Create(Stories storiesDto)
         {
             try
             {
@@ -38,12 +37,12 @@ namespace UserStories.BLL.Services
                 };
                 Database.StoriesManager.Create(stories);
                 await Database.SaveAsync();
-                return new OperationDetails(true, "История добавленна");
+                return true;
 
             }
             catch (Exception ex)
             {
-                return new OperationDetails(false, ex.Message);
+                return false;
             }
         }
     }

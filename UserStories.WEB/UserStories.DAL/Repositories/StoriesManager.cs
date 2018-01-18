@@ -21,7 +21,6 @@ namespace UserStories.DAL.Repositories
         public void Create(Stories item)
         {
             Database.Stories.Add(item);
-            Database.SaveChanges();
         }
 
         public void Dispose()

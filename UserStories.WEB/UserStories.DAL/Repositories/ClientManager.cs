@@ -1,5 +1,6 @@
 ﻿
 
+using System.Data.Entity;
 using UserStories.BLL.EF;
 using UserStories.BLL.Entities;
 using UserStories.BLL.Interfase;
@@ -16,8 +17,7 @@ namespace UserStories.DAL.Repositories
 
         public void Create(ClientProfile item)
         {
-            Database.ClientProfiles.Add(item);
-            Database.SaveChanges();
+            Database.ClientProfiles.Add(item);           
         }
 
         public void Dispose()

@@ -6,14 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UserStories.BLL.DTO;
 using UserStories.BLL.Entities;
-using UserStories.BLL.Infrastructure;
 
 namespace UserStories.BLL.Interfaces
 {
     public interface IUserService :IDisposable
     {
         Task Create(ApplicationUser user, string password);
-        Task<ClaimsIdentity> Authenticate(ApplicationUser userDto);
+        ClaimsIdentity Authenticate(ApplicationUser userDto);
         Task SetInitialData(ApplicationUser adminDto, List<string> roles);
     }
 }
