@@ -21,7 +21,7 @@ namespace UserStories.BLL.Tests
             var user = new ApplicationUser();
             fakeService.SetUser(user);
             fakeService.SetClaims(null);
-            var userService = new UserService(null, null, fakeService, null);
+            var userService = new UserService(null, fakeService, null);
             //ACT
             var result = userService.Authenticate(null);
             //ASSERT
@@ -38,7 +38,7 @@ namespace UserStories.BLL.Tests
             fakeService.SetClaims(clain);
             fakeService.SetUser(user);
             fakeService.CreateIdentity(user, null);
-            var userService = new UserService(null, null, fakeService, null);
+            var userService = new UserService(null,  fakeService, null);
             //ACT
             var result = userService.Authenticate(user);
             //ASSERT
@@ -54,7 +54,7 @@ namespace UserStories.BLL.Tests
             var user = new ApplicationUser();
             //fakeService.SetUser(user);
             fakeService.CreateIdentity(user, null);
-            var userService = new UserService(null, null, fakeService, null);
+            var userService = new UserService(null, fakeService, null);
             //ACT
             var result = userService.Authenticate(user);
             //ASSERT
@@ -69,7 +69,7 @@ namespace UserStories.BLL.Tests
             var user = new ApplicationUser();
             fakeService.SetUser(user);
             fakeService.CreateIdentity(user, null);
-            var userService = new UserService(null, null, fakeService, null);
+            var userService = new UserService(null, fakeService, null);
             //ACT
             var result = userService.Authenticate(user);
             //ASSERT
@@ -85,7 +85,7 @@ namespace UserStories.BLL.Tests
             var user = new ApplicationUser{Email = "sdf@mail.ru"};
             fakeService.SetUser(user);
             fakeService.CreateUsers(user,password);
-            var userService = new UserService(null, null, fakeService, null);
+            var userService = new UserService(null, fakeService, null);
             //ACT
             var flag = userService.Create(user.Email, password);
             //ASSERT
@@ -105,7 +105,7 @@ namespace UserStories.BLL.Tests
             fakeService.SetUser(user);
             fakeService.SetFlagCreate(true);
             fakeService.CreateUsers(user,password );
-            var userService = new UserService(faceUnitWork, null, fakeService,fakeClientManager);
+            var userService = new UserService(faceUnitWork, fakeService,fakeClientManager);
             //ACT
             var flag = userService.Create(user.Email, password);
             //ASSERT
@@ -122,7 +122,7 @@ namespace UserStories.BLL.Tests
             fakeService.SetUser(user);
             fakeService.SetFlagCreate(true);
             fakeService.CreateUsers(user, password);
-            var userService = new UserService(null, null, fakeService,null);
+            var userService = new UserService(null, fakeService,null);
             //ACT
             userService.Create(user.Email, password);
             //ASSERT
@@ -133,7 +133,7 @@ namespace UserStories.BLL.Tests
         {
             public IClientManager ClientManager => throw new NotImplementedException();
 
-            public IApplicationRoleManager RoleManager => throw new NotImplementedException();
+            //public IApplicationRoleManager RoleManager => throw new NotImplementedException();
 
             public IApplicationUserManager UserManager => throw new NotImplementedException();
 

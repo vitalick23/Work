@@ -15,18 +15,18 @@ namespace UserStories.BLL.Repositories
     {
         private ApplicationContext db;
         private IApplicationUserManager userManager;
-        private IApplicationRoleManager roleManager;
+       // private IApplicationRoleManager roleManager;
         private IClientManager clientManager;
         private IStoriesManager storiesManager;
 
         public IdentityUnitOfWork(ApplicationContext applicationContext,
-            IApplicationRoleManager roleManager,
+      //      IApplicationRoleManager roleManager,
             IApplicationUserManager userManager,
             IClientManager clientManager,
             IStoriesManager storiesManager)
         {
             db = applicationContext;
-            this.roleManager = roleManager;
+          //  this.roleManager = roleManager;
             this.userManager = userManager;
             this.clientManager = clientManager;
             this.storiesManager = storiesManager;
@@ -53,10 +53,10 @@ namespace UserStories.BLL.Repositories
             get { return storiesManager; }
         }
         
-        public IApplicationRoleManager RoleManager
-        {
-            get { return roleManager; }
-        }
+        //public IApplicationRoleManager RoleManager
+        //{
+        //    get { return roleManager; }
+        //}
 
      
 
@@ -64,7 +64,7 @@ namespace UserStories.BLL.Repositories
         {
             GC.SuppressFinalize(this);
             userManager.Dispose();
-            roleManager.Dispose();
+       //     roleManager.Dispose();
             clientManager.Dispose();
             //storiesManager.Dispose();
         }

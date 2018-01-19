@@ -10,25 +10,24 @@ using UserStories.BLL.Interfaces;
 
 namespace UserStories.BLL.Identity
 {
-    public class ApplicationRoleManager : RoleManager<ApplicationRole>, IApplicationRoleManager
-    {
-        public ApplicationRoleManager(RoleStore<ApplicationRole> store) : base(store)
-        {
+    //public class ApplicationRoleManager : RoleManager<ApplicationRole>, IApplicationRoleManager
+    //{
+    //    public ApplicationRoleManager(RoleStore<ApplicationRole> store) : base(store)
+    //    {
 
-        }
+    //    }
 
-     
-        bool IApplicationRoleManager.CreateRole(ApplicationRole item)
-        {
-            var result = CreateAsync(item);
-            if (result.Status == TaskStatus.Created) return true;
-            return false;
-        }
+    //    bool IApplicationRoleManager.CreateRole(ApplicationRole item)
+    //    {
+    //        var result = CreateAsync(item);
+    //        if (result.Status == TaskStatus.Created) return true;
+    //        return false;
+    //    }
 
-        //ApplicationRole IApplicationRoleManager.FindByName(string roleName)
-        //{
-        //    var result = FindByNameAsync(roleName);
-        //    return result;
-        //}
-    }
+    //    //ApplicationRole IApplicationRoleManager.FindByName(string roleName)
+    //    //{
+    //    //    var result = FindByNameAsync(roleName);
+    //    //    return result;
+    //    //}
+    //}
 }

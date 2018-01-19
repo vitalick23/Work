@@ -13,17 +13,17 @@ namespace UserStories.BLL.Services
 {
     public class UserService: IUserService
     {
-        private readonly IApplicationRoleManager _rolemanegr;
+       // private readonly IApplicationRoleManager _rolemanegr;
         IUnitOfWork Database { get; set; }
         public IApplicationUserManager _applicationUserManager;
         private IClientManager clientManager;
 
         public UserService(IUnitOfWork uow, 
-            IApplicationRoleManager rolemanegr,
+      //      IApplicationRoleManager rolemanegr,
             IApplicationUserManager applicationUserManager,
             IClientManager clientManager)
         {
-            _rolemanegr = rolemanegr;
+       //     _rolemanegr = rolemanegr;
             _applicationUserManager = applicationUserManager;
             this.clientManager = clientManager;
             Database = uow;

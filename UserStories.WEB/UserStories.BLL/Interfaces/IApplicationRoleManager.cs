@@ -7,11 +7,8 @@ using UserStories.BLL.Entities;
 
 namespace UserStories.BLL.Interfaces
 {
-    public interface IApplicationRoleManager : IDisposable
-    {
-        bool CreateRole(ApplicationRole item);
-      //  ApplicationRole FindByName(string roleName);
-
-
-    }
+    //public interface IApplicationRoleManager : IDisposable
+    //{
+    //    bool CreateRole(ApplicationRole item);
+    //}
 }

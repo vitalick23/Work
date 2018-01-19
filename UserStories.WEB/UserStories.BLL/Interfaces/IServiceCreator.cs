@@ -7,7 +7,7 @@ namespace UserStories.BLL.Interfaces
     public interface IServiceCreator
     {
         IUserService CreateUserService(ApplicationContext applicationContext, 
-            IApplicationRoleManager roleManager,
+            //IApplicationRoleManager roleManager,
             IApplicationUserManager userManager,
             IClientManager clientManager,
             IStoriesManager storiesManager);

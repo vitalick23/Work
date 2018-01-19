@@ -13,7 +13,7 @@ namespace UserStories.BLL.Interfase
         //IUserStore<UserManager<>>
         //ApplicationUserManager UserManager { get; }
         IClientManager ClientManager { get; }
-        IApplicationRoleManager RoleManager { get; }
+        //IApplicationRoleManager RoleManager { get; }
         IApplicationUserManager UserManager { get; }
         IStoriesManager StoriesManager { get; }
         Task SaveAsync();

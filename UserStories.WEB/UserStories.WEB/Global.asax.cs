@@ -8,6 +8,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using UserStories.BLL.EF;
 using UserStories.BLL.Entities;
 using UserStories.BLL.Identity;
@@ -37,7 +38,12 @@ namespace UserStories.WEB
             builder.RegisterType<StoriesServise>().As<IStoriesSevises>();
             builder.RegisterType<ClientManager>().As<IClientManager>();
             builder.RegisterType<ApplicationUserManager>().As<IApplicationUserManager>();
-            builder.RegisterType<ApplicationRoleManager>().As<IApplicationRoleManager>();
+            builder.RegisterType<StoriesManager>().As<IStoriesManager>();
+            builder.RegisterType<UserStore<ApplicationUser>>().As<IUserStore<ApplicationUser>>();
+            //builder.RegisterType<RoleStore<IdentityRole>>().As<IRoleStore<IdentityRole, string>>();
+            builder.RegisterType<ApplicationUserManager>();
+           // builder.RegisterType<ApplicationRoleManager>();
+            // builder.RegisterType<ApplicationRoleManager>().As<IApplicationRoleManager>();
             builder.RegisterType<UserService>().As<IUserService>();
 
 
