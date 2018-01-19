@@ -28,8 +28,11 @@ namespace UserStories.WEB.Models
         public static explicit operator ApplicationUser(RegisterModel model)
         {
             var user = new ApplicationUser();
+            user.clientProfile = new ClientProfile();
             user.clientProfile.Adress = model.Address;
             user.clientProfile.Name = model.Name;
+            user.Email = model.Email;
+            user.PasswordHash = model.Password;
             return user;
         }
     }

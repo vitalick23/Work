@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserStories.BLL", "UserStor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserStories.BLL.Tests", "UserStories.BLL.Tests\UserStories.BLL.Tests.csproj", "{506F6FA3-3F26-4F09-8D6D-854D69D8638D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserStories.WEB.Test", "UserStories.WEB.Test\UserStories.WEB.Test.csproj", "{30E314D5-4EF3-4B7C-88B3-0AF967599457}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{506F6FA3-3F26-4F09-8D6D-854D69D8638D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{506F6FA3-3F26-4F09-8D6D-854D69D8638D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{506F6FA3-3F26-4F09-8D6D-854D69D8638D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E314D5-4EF3-4B7C-88B3-0AF967599457}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E314D5-4EF3-4B7C-88B3-0AF967599457}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E314D5-4EF3-4B7C-88B3-0AF967599457}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E314D5-4EF3-4B7C-88B3-0AF967599457}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

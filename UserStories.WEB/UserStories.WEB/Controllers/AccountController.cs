@@ -41,7 +41,7 @@ namespace UserStories.WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginModel model)
+        public ActionResult Login(LoginModel model)
         {
             
             if (ModelState.IsValid)
@@ -78,14 +78,15 @@ namespace UserStories.WEB.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterModel model)
+        public  ActionResult Register(RegisterModel model)
         {
 
             if (ModelState.IsValid)
             {
                 ApplicationUser user = (ApplicationUser)model;
                // var user = new ApplicationUser();
-                _userService.Create(user.Email,model.Password);
+                if (!_userService.Create(user.Email, model.Password))
+                    return View(model);
                  return RedirectToAction("Index", "Home");
            }
             return View(model);
