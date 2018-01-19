@@ -35,7 +35,8 @@ namespace UserStories.BLL.Identity
 
         public ApplicationUser FindUser(string email, string password)
         {
-            return FindUser(email, password);
+            var result  = FindAsync(email, password);
+            return null;
         }
 
         ApplicationUser IApplicationUserManager.FindByEmail(string email)

@@ -48,3 +48,4 @@ D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\Microsoft.AspNet.Identity
 D:\Work\Work\UserStories.WEB\UserStories.BLL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 D:\Work\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.dll
 D:\Work\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.pdb
+D:\Work\Work\UserStories.WEB\UserStories.BLL\obj\Debug\UserStories.BLL.csprojResolveAssemblyReference.cache

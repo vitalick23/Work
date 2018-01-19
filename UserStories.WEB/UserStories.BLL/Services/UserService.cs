@@ -19,11 +19,12 @@ namespace UserStories.BLL.Services
         private IClientManager clientManager;
 
         public UserService(IUnitOfWork uow, 
-      //      IApplicationRoleManager rolemanegr,
+      
             IApplicationUserManager applicationUserManager,
             IClientManager clientManager)
         {
-       //     _rolemanegr = rolemanegr;
+            //      IApplicationRoleManager rolemanegr,
+            //     _rolemanegr = rolemanegr;
             _applicationUserManager = applicationUserManager;
             this.clientManager = clientManager;
             Database = uow;

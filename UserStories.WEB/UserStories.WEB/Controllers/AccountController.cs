@@ -46,9 +46,7 @@ namespace UserStories.WEB.Controllers
             
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser();
-                                
-                RegisterModel userDto = new RegisterModel { Email = model.Email, Password = model.Password };
+                ApplicationUser user = new ApplicationUser{ Email = model.Email, PasswordHash = model.Password };
                 ClaimsIdentity claim =  _userService.Authenticate(user);
                 if (claim == null)
                 {

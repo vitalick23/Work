@@ -1,4 +1,3 @@
-D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\obj\Debug\UserStories.BLL.Tests.csprojResolveAssemblyReference.cache
 D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\obj\Debug\UserStories.BLL.Tests.csproj.CoreCompileInputs.cache
 D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
 D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
@@ -23,3 +22,4 @@ D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\obj\Debug\UserStories.BLL.Tes
 D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\UserStories.BLL.Tests.dll.config
 D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\EntityFramework.SqlServer.dll
 D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\EntityFramework.SqlServer.xml
+D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\obj\Debug\UserStories.BLL.Tests.csprojResolveAssemblyReference.cache

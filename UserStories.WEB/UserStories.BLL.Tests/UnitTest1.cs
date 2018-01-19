@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UserStories.BLL.Entities;
@@ -13,12 +14,26 @@ namespace UserStories.BLL.Tests
     [TestClass]
     public class UserServiceTests
     {
+        private FakeIApplicationUserManager fakeService;
+        private FakeIClientManager fakeClientManager;
+
+        public FakeIUnitOfWork faceUnitWork;
+
+        public UserService userService;
+
+        public ApplicationUser user { get; private set; }
+        public UserServiceTests()
+        {
+            fakeService = new FakeIApplicationUserManager();
+            fakeClientManager = new FakeIClientManager();
+            faceUnitWork = new FakeIUnitOfWork();
+            userService = new UserService(faceUnitWork, fakeService, fakeClientManager);
+            user = new ApplicationUser { Email = "asdds@mail.ru" };
+        }
         [TestMethod]
         public void AuthenticateifUserNull()
         {
             //ARANGE
-            var fakeService = new FakeIApplicationRoleManager();
-            var user = new ApplicationUser();
             fakeService.SetUser(user);
             fakeService.SetClaims(null);
             var userService = new UserService(null, fakeService, null);
@@ -32,9 +47,7 @@ namespace UserStories.BLL.Tests
         public void AuthenticateifUserNotNull()
         {
             //ARANGE
-            var fakeService = new FakeIApplicationRoleManager();
             var clain = new ClaimsIdentity();
-            var user = new ApplicationUser();
             fakeService.SetClaims(clain);
             fakeService.SetUser(user);
             fakeService.CreateIdentity(user, null);
@@ -49,10 +62,6 @@ namespace UserStories.BLL.Tests
         public void AuthenticateifUClaimNull()
         {
             //ARANGE
-            var fakeService = new FakeIApplicationRoleManager();
-            var clain = new ClaimsIdentity();
-            var user = new ApplicationUser();
-            //fakeService.SetUser(user);
             fakeService.CreateIdentity(user, null);
             var userService = new UserService(null, fakeService, null);
             //ACT
@@ -65,8 +74,6 @@ namespace UserStories.BLL.Tests
         public void AuthenticateifUserNotFind()
         {
             //ARANGE
-            var fakeService = new FakeIApplicationRoleManager();
-            var user = new ApplicationUser();
             fakeService.SetUser(user);
             fakeService.CreateIdentity(user, null);
             var userService = new UserService(null, fakeService, null);
@@ -80,16 +87,14 @@ namespace UserStories.BLL.Tests
         public void CreateifUserNotCreate()
         {
             //ARANGE
-            var fakeService = new FakeIApplicationRoleManager();
             string password = "**";
-            var user = new ApplicationUser{Email = "sdf@mail.ru"};
             fakeService.SetUser(user);
             fakeService.CreateUsers(user,password);
             var userService = new UserService(null, fakeService, null);
             //ACT
             var flag = userService.Create(user.Email, password);
             //ASSERT
-            Assert.IsFalse(flag || fakeService.GetCountUser() == 0);
+            Assert.IsFalse(fakeService.GetCountUser() >= 1 && flag);
             //Assert.AreEqual(0,fakeService.GetCountUser());
         }
 
@@ -97,14 +102,11 @@ namespace UserStories.BLL.Tests
         public void CreateifUserCreate()
         {
             //ARANGE
-            var fakeClientManager = new FakeIClientManager();
-            var fakeService = new FakeIApplicationRoleManager();
-            var faceUnitWork = new FakeIUnitOfWork();
-            var user = new ApplicationUser{Email = "asdds@mail.ru"};
             var password = "S03an92!";
             fakeService.SetUser(user);
             fakeService.SetFlagCreate(true);
             fakeService.CreateUsers(user,password );
+            faceUnitWork.SetFlagSave(true);
             var userService = new UserService(faceUnitWork, fakeService,fakeClientManager);
             //ACT
             var flag = userService.Create(user.Email, password);
@@ -116,21 +118,37 @@ namespace UserStories.BLL.Tests
         public void CreateifUserNotSave()
         {
             //ARANGE
-            var fakeService = new FakeIApplicationRoleManager();
-            var user = new ApplicationUser();
             string password = "**";
             fakeService.SetUser(user);
             fakeService.SetFlagCreate(true);
             fakeService.CreateUsers(user, password);
-            var userService = new UserService(null, fakeService,null);
+            faceUnitWork.SetFlagSave(false);
+
             //ACT
-            userService.Create(user.Email, password);
+            var flag = userService.Create(user.Email, password);
             //ASSERT
-            Assert.AreEqual(false, fakeService.GetFlagSave());
+            Assert.AreEqual(false,flag);
+        }
+
+        [TestMethod]
+        public void CreateifEmailEmpty()
+        {
+            //ARANGE
+            string password = "**";
+            fakeService.SetUser(user);
+            fakeService.SetFlagCreate(true);
+            fakeService.CreateUsers(user, password);
+            faceUnitWork.SetFlagSave(false);
+
+            //ACT
+            var flag = userService.Create(user.Email, password);
+            //ASSERT
+            Assert.AreEqual(false, flag);
         }
 
         public class FakeIUnitOfWork : IUnitOfWork
         {
+            private bool flagSave = false;
             public IClientManager ClientManager => throw new NotImplementedException();
 
             //public IApplicationRoleManager RoleManager => throw new NotImplementedException();
@@ -143,9 +161,14 @@ namespace UserStories.BLL.Tests
             {
                 throw new NotImplementedException();
             }
-
+           
+            public void SetFlagSave(bool flag)
+            {
+                flagSave = flag;
+            }
             public Task SaveAsync()
             {
+                if(!flagSave) return Task.FromCanceled(CancellationToken.None);
                 return Task.CompletedTask;
             }
         }
@@ -163,15 +186,15 @@ namespace UserStories.BLL.Tests
             }
         }
 
-        public class FakeIApplicationRoleManager : IApplicationUserManager
+        public class FakeIApplicationUserManager : IApplicationUserManager
         {
             public List<ApplicationUser> listUser;
-            private bool flagSave = false;
+           
             private bool flagCreate = false;
             private ApplicationUser user;
             private ClaimsIdentity claim;
 
-            public FakeIApplicationRoleManager()
+            public FakeIApplicationUserManager()
             {
                 listUser = new List<ApplicationUser>();
             }
@@ -204,11 +227,6 @@ namespace UserStories.BLL.Tests
                 return user;
             }
 
-            public bool GetFlagSave()
-            {
-                return flagSave;
-            }
-            
             public ClaimsIdentity CreateIdentity(ApplicationUser user, string applicationType)
             {
                 return claim;
@@ -223,10 +241,7 @@ namespace UserStories.BLL.Tests
             {
                 flagCreate = flag;
             }
-            public void SetFlagSave(bool flag)
-            {
-                flagSave = flag;
-            }
+           
             public bool CreateUsers(ApplicationUser user, string password)
             {
                 if(flagCreate) addUser(user);
