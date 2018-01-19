@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using UserStories.BLL.DTO;
 using UserStories.BLL.Interfaces;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using UserStories.BLL.Entities;
 using UserStories.BLL.Interfase;
@@ -17,16 +18,18 @@ namespace UserStories.BLL.Services
         IUnitOfWork Database { get; set; }
         public IApplicationUserManager _applicationUserManager;
         private IClientManager clientManager;
+        private IStoriesManager storiesManager;
 
         public UserService(IUnitOfWork uow, 
       
             IApplicationUserManager applicationUserManager,
-            IClientManager clientManager)
+            IClientManager clientManager,IStoriesManager storiesManager)
         {
             //      IApplicationRoleManager rolemanegr,
             //     _rolemanegr = rolemanegr;
             _applicationUserManager = applicationUserManager;
             this.clientManager = clientManager;
+            this.storiesManager = storiesManager;
             Database = uow;
         }
 
@@ -82,6 +85,17 @@ namespace UserStories.BLL.Services
                         }
                     }
                 }
+
+            return false;
+        }
+
+        //no test
+        public bool CreateStories(Stories item)
+        {
+            if (item != null)
+            {
+                storiesManager.Create(item);
+            }
 
             return false;
         }

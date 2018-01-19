@@ -35,7 +35,7 @@ namespace UserStories.WEB.Test
         }
 
         [TestMethod]
-        public void TestRegisterPostActionModelError()
+        public void TestRegisterPostModelError()
         {
             RegisterModel model = new RegisterModel();
             controller.ModelState.AddModelError("Name","Error");
@@ -47,7 +47,7 @@ namespace UserStories.WEB.Test
         }
 
         [TestMethod]
-        public void TestRegisterPostActionModelSuccess()
+        public void TestRegisterPostModelSuccess()
         {
             RegisterModel model = new RegisterModel();
             faceUserService.SetFlagCreate(true);
@@ -58,7 +58,7 @@ namespace UserStories.WEB.Test
         }
 
         [TestMethod]
-        public void TestRegisterPostActionCreateError()
+        public void TestRegisterPostCreateError()
         {
             RegisterModel model = new RegisterModel();
 
@@ -77,7 +77,7 @@ namespace UserStories.WEB.Test
         }
 
         [TestMethod]
-        public void TestLoginPostActionModelError()
+        public void TestLoginPostModelError()
         {
            LoginModel model = new LoginModel();
            controller.ModelState.AddModelError("Email", "Error");
@@ -88,13 +88,34 @@ namespace UserStories.WEB.Test
             Assert.AreEqual(model, result.Model);
         }
 
+        [TestMethod]
+        public void TestLoginPostSuccess()
+        {
+            LoginModel model = new LoginModel();
+            faceUserService.SetFlagCreate(true);
+            faceUserService.SetFlagCreateIdentity(true);
+            
+            var result = controller.Login(model) as RedirectToRouteResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+        }
+
         public class FaceUserService : IUserService
         {
             private bool flagCreate = false;
+            private  bool flagCreateIdentity = false;
 
             public ClaimsIdentity Authenticate(ApplicationUser userDto)
             {
-                throw new NotImplementedException();
+                if(flagCreateIdentity) return new ClaimsIdentity();
+                return null;
+
+            }
+
+            public void SetFlagCreateIdentity(bool flag)
+            {
+                flagCreateIdentity = flag;
             }
 
             public void SetFlagCreate(bool flag)
@@ -112,6 +133,11 @@ namespace UserStories.WEB.Test
             }
 
             public Task SetInitialData(ApplicationUser adminDto, List<string> roles)
+            {
+                throw new NotImplementedException();
+            }
+
+            public bool CreateStories(Stories item)
             {
                 throw new NotImplementedException();
             }

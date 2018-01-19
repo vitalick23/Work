@@ -27,7 +27,7 @@ namespace UserStories.BLL.Tests
             fakeService = new FakeIApplicationUserManager();
             fakeClientManager = new FakeIClientManager();
             faceUnitWork = new FakeIUnitOfWork();
-            userService = new UserService(faceUnitWork, fakeService, fakeClientManager);
+            userService = new UserService(faceUnitWork, fakeService, fakeClientManager,null);
             user = new ApplicationUser { Email = "asdds@mail.ru" };
         }
         [TestMethod]
@@ -36,7 +36,7 @@ namespace UserStories.BLL.Tests
             //ARANGE
             fakeService.SetUser(user);
             fakeService.SetClaims(null);
-            var userService = new UserService(null, fakeService, null);
+            var userService = new UserService(null, fakeService, null,null);
             //ACT
             var result = userService.Authenticate(null);
             //ASSERT
@@ -51,7 +51,7 @@ namespace UserStories.BLL.Tests
             fakeService.SetClaims(clain);
             fakeService.SetUser(user);
             fakeService.CreateIdentity(user, null);
-            var userService = new UserService(null,  fakeService, null);
+            var userService = new UserService(null,  fakeService, null,null);
             //ACT
             var result = userService.Authenticate(user);
             //ASSERT
@@ -63,7 +63,7 @@ namespace UserStories.BLL.Tests
         {
             //ARANGE
             fakeService.CreateIdentity(user, null);
-            var userService = new UserService(null, fakeService, null);
+            var userService = new UserService(null, fakeService, null,null);
             //ACT
             var result = userService.Authenticate(user);
             //ASSERT
@@ -76,7 +76,7 @@ namespace UserStories.BLL.Tests
             //ARANGE
             fakeService.SetUser(user);
             fakeService.CreateIdentity(user, null);
-            var userService = new UserService(null, fakeService, null);
+            var userService = new UserService(null, fakeService, null,null);
             //ACT
             var result = userService.Authenticate(user);
             //ASSERT
@@ -90,7 +90,7 @@ namespace UserStories.BLL.Tests
             string password = "**";
             fakeService.SetUser(user);
             fakeService.CreateUsers(user,password);
-            var userService = new UserService(null, fakeService, null);
+            var userService = new UserService(null, fakeService, null,null);
             //ACT
             var flag = userService.Create(user.Email, password);
             //ASSERT
@@ -107,7 +107,7 @@ namespace UserStories.BLL.Tests
             fakeService.SetFlagCreate(true);
             fakeService.CreateUsers(user,password );
             faceUnitWork.SetFlagSave(true);
-            var userService = new UserService(faceUnitWork, fakeService,fakeClientManager);
+            var userService = new UserService(faceUnitWork, fakeService,fakeClientManager,null);
             //ACT
             var flag = userService.Create(user.Email, password);
             //ASSERT

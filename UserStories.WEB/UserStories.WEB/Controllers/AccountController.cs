@@ -6,22 +6,24 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using System.Web.WebSockets;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using UserStories.BLL.DTO;
 using UserStories.BLL.Interfaces;
 using UserStories.BLL.Services;
 using UserStories.WEB.Models;
 using UserStories.BLL.Entities;
-
+//see  home http://blog.byndyu.ru/p/blog-page_19.html
 namespace UserStories.WEB.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IUserService _userService;
 
-
-        private IAuthenticationManager AuthenticationManager
+        //спросить как реализовывать
+        public IAuthenticationManager AuthenticationManager
         {
             get
             {
@@ -54,11 +56,11 @@ namespace UserStories.WEB.Controllers
                 }
                 else
                 {
-                    AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
-                    {
-                        IsPersistent = true
-                    }, claim);
+                                                {
+                                                    IsPersistent = true
+                                                },
+                                                    claim);
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -76,6 +78,7 @@ namespace UserStories.WEB.Controllers
             return View();
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public  ActionResult Register(RegisterModel model)
@@ -89,6 +92,30 @@ namespace UserStories.WEB.Controllers
                     return View(model);
                  return RedirectToAction("Index", "Home");
            }
+            return View(model);
+        }
+
+        public ActionResult CreateStories()
+        {
+            return View();
+        }
+        //no test
+        [HttpPost]
+        public ActionResult CreateStories(StoriesModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.IdUser = HttpContext.User.Identity.GetUserId();
+                model.TimePublicate = DateTime.Now;
+                if (_userService.CreateStories((Stories) model))
+                {
+                    //see work with mes
+                   // Message m = new Message("CreateS");
+                   // m.shoewww
+                    return RedirectToAction("Index", "Home");
+                }
+                return View(model);
+            }
             return View(model);
         }
         //private async Task SetInitialDataAsync()
