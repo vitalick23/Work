@@ -13,37 +13,59 @@ namespace UserStories.BLL.Services
     public class StoriesServise : IStoriesSevises
     {
         IUnitOfWork Database { get; set; }
+        IStoriesManager storiesManager;
+        IApplicationUserManager applicationUserManager;
 
-        public StoriesServise(IUnitOfWork uow)
+        public StoriesServise(IUnitOfWork uow,IStoriesManager storiesManager,IApplicationUserManager userManager)
         {
+            this.storiesManager = storiesManager;
+            this.applicationUserManager = userManager;
             Database = uow;
+
         }
 
         public void Dispose()
         {
+            storiesManager.Dispose();
+            applicationUserManager.Dispose();
             Database.Dispose();
         }
 
-        public async Task<bool> Create(Stories storiesDto)
+        public bool Create(Stories item)
         {
+            if (item == null) return false;
             try
             {
-                var stories = new Stories()
+                if (storiesManager.Create(item))
                 {
-                    Id = storiesDto.Id,
-                    IdUser = storiesDto.IdUser,
-                    Story = storiesDto.Story,
-                    TimePublicate = storiesDto.TimePublicate
-                };
-                Database.StoriesManager.Create(stories);
-                await Database.SaveAsync();
-                return true;
+                    Database.SaveAsync();
+                    return true;
+                }
+                else return false;
 
             }
-            catch (Exception ex)
+            
+            catch (Exception)
             {
                 return false;
             }
+        }
+
+        public List<Stories> GetStories()
+        {
+            return storiesManager.GetStories();
+        }
+
+        public List<Stories> GetStoriesByUserName(string userName)
+        {
+            var user = applicationUserManager.FindByEmail(userName);
+            if (user == null) return null;
+            return storiesManager.GetStoriesByUserName(userName);
+        }
+
+        public Stories GetStories(string idStory)
+        {
+            return storiesManager.GetStories(idStory);
         }
     }
 }

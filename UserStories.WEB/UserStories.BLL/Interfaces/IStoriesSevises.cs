@@ -10,6 +10,12 @@ namespace UserStories.BLL.Interfaces
 {
     public interface IStoriesSevises : IDisposable
     {
-        Task<bool> Create(Stories stories);
+        bool Create(Stories item);
+
+        List<Stories> GetStories();
+
+        List<Stories> GetStoriesByUserName(string userName);
+
+        Stories GetStories(string idStory);
     }
 }

@@ -9,6 +9,12 @@ namespace UserStories.BLL.Interfase
 {
     public interface IStoriesManager : IDisposable
     {
-        void Create(Stories item);
+        bool Create(Stories item);
+
+        List<Stories> GetStories();
+
+        List<Stories> GetStoriesByUserName(string userName);
+
+        Stories GetStories(string idStory);
     }
 }

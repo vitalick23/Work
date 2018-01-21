@@ -88,34 +88,5 @@ namespace UserStories.BLL.Services
 
             return false;
         }
-
-        //no test
-        public bool CreateStories(Stories item)
-        {
-            if (item != null)
-            {
-                storiesManager.Create(item);
-            }
-
-            return false;
-        }
-
-        public Task SetInitialData(ApplicationUser adminDto, List<string> roles)
-        {
-            throw new NotImplementedException();
-        }
     }
-    //public async Task SetInitialData(ApplicationUser adminDto, List<string> roles)
-    //{
-    //    foreach (string roleName in roles)
-    //    {
-    //        var role = await Database.RoleManager.FindByNameAsync(roleName);
-    //        if (role == null)
-    //        {
-    //            role = new ApplicationRole { Name = roleName };
-    //            await Database.RoleManager.CreateAsync(role);
-    //        }
-    //    }
-    //    await Create(adminDto);
-    //}  
 }

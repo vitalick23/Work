@@ -18,14 +18,34 @@ namespace UserStories.DAL.Repositories
             Database = db;
         }
 
-        public void Create(Stories item)
+        public bool Create(Stories item)
         {
-            Database.Stories.Add(item);
+            try
+            {
+                Database.Stories.Add(item);
+                return true;
+            }
+            catch (Exception) { return false; }
         }
 
         public void Dispose()
         {
             Database.Dispose();
+        }
+
+        public List<Stories> GetStories()
+        {
+            return Database.Stories.ToList();
+        }
+
+        public List<Stories> GetStoriesByUserName(string userName)
+        {
+           return Database.Stories.Where(x => x.IdUser == Database.Users.Where(q => q.UserName == userName).First().Id).ToList();
+        }
+
+        public Stories GetStories(string idStory)
+        {
+            return Database.Stories.Find(idStory);
         }
     }
 }

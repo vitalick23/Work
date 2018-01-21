@@ -13,7 +13,6 @@ namespace UserStories.BLL.Interfaces
     {
         bool Create(string email, string password);
         ClaimsIdentity Authenticate(ApplicationUser userDto);
-        Task SetInitialData(ApplicationUser adminDto, List<string> roles);
-        bool CreateStories(Stories item);
+      
     }
 }

@@ -1,0 +1,20 @@
+﻿@model UserStories.WEB.Models.StoriesModel
+
+<div class="=well">
+    @using (Html.BeginForm())
+    {
+        <div class="pull-right">
+            @Html.Hidden("Id", Model.Id)
+            @Html.Hidden("IdUser", Model.IdUser)
+            <input type="submit" class="btn btn-success" value="See" />
+
+        </div>
+        }
+        <h1><strong>Story</strong></h1>
+        @{
+            string str = @Model.Story.Substring(0, 50);
+        }
+        <p>@str</p>
+    }
+
+</div>

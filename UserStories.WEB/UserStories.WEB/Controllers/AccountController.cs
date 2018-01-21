@@ -95,40 +95,7 @@ namespace UserStories.WEB.Controllers
             return View(model);
         }
 
-        public ActionResult CreateStories()
-        {
-            return View();
-        }
-        //no test
-        [HttpPost]
-        public ActionResult CreateStories(StoriesModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                model.IdUser = HttpContext.User.Identity.GetUserId();
-                model.TimePublicate = DateTime.Now;
-                if (_userService.CreateStories((Stories) model))
-                {
-                    //see work with mes
-                   // Message m = new Message("CreateS");
-                   // m.shoewww
-                    return RedirectToAction("Index", "Home");
-                }
-                return View(model);
-            }
-            return View(model);
-        }
-        //private async Task SetInitialDataAsync()
-        //{
-        //    await UserService.SetInitialData(new UserDTO
-        //    {
-        //        Email = "vitali_fc_arsenal@mail.ru",
-        //        UserName = "vitali_fc_arsenal@mail.ru",
-        //        Password = "S03an92!",
-        //        Name = "Долговечный Виталий Николаевич",
-        //        Address = "ул",
-        //        Role = "admin",
-        //    }, new List<string> { "user", "admin" });
-        //}
+        
+        
     }
 }

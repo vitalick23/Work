@@ -56,3 +56,6 @@ D:\Work\Work\UserStories.WEB\UserStories.WEB.Test\obj\Debug\UserStories.WEB.Test
 D:\Work\Work\UserStories.WEB\UserStories.WEB.Test\obj\Debug\UserStories.WEB.Test.csproj.CoreCompileInputs.cache
 D:\Work\Work\UserStories.WEB\UserStories.WEB.Test\obj\Debug\UserStories.WEB.Test.dll
 D:\Work\Work\UserStories.WEB\UserStories.WEB.Test\obj\Debug\UserStories.WEB.Test.pdb
+D:\Work\Work\UserStories.WEB\UserStories.WEB.Test\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+D:\Work\Work\UserStories.WEB\UserStories.WEB.Test\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+D:\Work\Work\UserStories.WEB\UserStories.WEB.Test\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll

@@ -23,3 +23,6 @@ D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\UserStories.BLL.Tes
 D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\EntityFramework.SqlServer.dll
 D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\EntityFramework.SqlServer.xml
 D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\obj\Debug\UserStories.BLL.Tests.csprojResolveAssemblyReference.cache
+D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+D:\Work\Work\UserStories.WEB\UserStories.BLL.Tests\bin\Debug\ru\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
