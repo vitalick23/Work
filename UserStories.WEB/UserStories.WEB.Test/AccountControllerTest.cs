@@ -12,7 +12,7 @@ using UserStories.WEB.Models;
 namespace UserStories.WEB.Test
 {
     [TestClass]
-    public class UserStoriesAccountControllerTest
+    public class AccountControllerTest
     {
         public FaceUserService faceUserService { get; private set; }
         public AccountController controller { get; private set; }

@@ -166,6 +166,8 @@ namespace UserStories.BLL.Tests
 
             public IStoriesManager StoriesManager => throw new System.NotImplementedException();
 
+            public ICommentManager CommentManager => throw new System.NotImplementedException();
+
             public void SetFlagSave(bool flag)
             {
                 flagSave = flag;
@@ -217,6 +219,7 @@ namespace UserStories.BLL.Tests
                 throw new System.NotImplementedException();
             }
         }
+
         public class FaceStoriesManage : IStoriesManager
         {
             bool flagCreate = false;

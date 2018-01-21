@@ -16,5 +16,6 @@ namespace UserStories.BLL.EF
 
         public DbSet<ClientProfile> ClientProfiles { get; set; }
         public DbSet<Stories> Stories { get; set; }
+        public DbSet<Comment> Comment { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace UserStories.BLL.Interfase
         //IApplicationRoleManager RoleManager { get; }
         IApplicationUserManager UserManager { get; }
         IStoriesManager StoriesManager { get; }
+        ICommentManager CommentManager { get; }
         Task SaveAsync();
     }
 }

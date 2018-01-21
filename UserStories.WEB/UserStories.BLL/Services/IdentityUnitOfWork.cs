@@ -18,24 +18,32 @@ namespace UserStories.BLL.Repositories
        // private IApplicationRoleManager roleManager;
         private IClientManager clientManager;
         private IStoriesManager storiesManager;
+        public ICommentManager commentManager;
 
         public IdentityUnitOfWork(ApplicationContext applicationContext,
       //      IApplicationRoleManager roleManager,
             IApplicationUserManager userManager,
             IClientManager clientManager,
-            IStoriesManager storiesManager)
+            IStoriesManager storiesManager,
+            ICommentManager commentManager)
         {
             db = applicationContext;
           //  this.roleManager = roleManager;
             this.userManager = userManager;
             this.clientManager = clientManager;
             this.storiesManager = storiesManager;
+            this.commentManager = commentManager;
             // storiesManager = new StoriesManager(db);
         }
 
         public async Task SaveAsync()
         {
             await db.SaveChangesAsync();
+        }
+
+        public ICommentManager CommentManager
+        {
+            get { return commentManager; }
         }
 
        public IApplicationUserManager UserManager
@@ -52,13 +60,9 @@ namespace UserStories.BLL.Repositories
         {
             get { return storiesManager; }
         }
-        
-        //public IApplicationRoleManager RoleManager
-        //{
-        //    get { return roleManager; }
-        //}
 
-     
+
+
 
         public void Dispose()
         {

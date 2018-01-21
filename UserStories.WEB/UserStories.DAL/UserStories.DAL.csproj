@@ -58,6 +58,7 @@
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ClientManager.cs" />
+    <Compile Include="Repositories\CommentManager.cs" />
     <Compile Include="Repositories\StoriesManager.cs" />
   </ItemGroup>
   <ItemGroup>

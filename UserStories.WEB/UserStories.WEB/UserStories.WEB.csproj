@@ -234,6 +234,7 @@
     <Content Include="Views\Stories\CreateStories.cshtml" />
     <Content Include="Views\Home\StoriesPartial.cshtml" />
     <Content Include="Views\Stories\Stories.cshtml" />
+    <Content Include="Views\Stories\CommentPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

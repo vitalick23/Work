@@ -157,6 +157,8 @@ namespace UserStories.BLL.Tests
 
             public IStoriesManager StoriesManager => throw new NotImplementedException();
 
+            public ICommentManager CommentManager => throw new NotImplementedException();
+
             public void Dispose()
             {
                 throw new NotImplementedException();

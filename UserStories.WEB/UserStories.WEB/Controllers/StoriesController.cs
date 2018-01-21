@@ -18,7 +18,7 @@ namespace UserStories.WEB.Controllers
         {
             _storiesService = storiesService;
         }
-        //no test 
+        
         public ActionResult Stories(string idStories)
         {
             var model = _storiesService.GetStories(idStories);
@@ -29,8 +29,8 @@ namespace UserStories.WEB.Controllers
         {
             return View();
         }
-        //no test
-        [HttpPost]
+      
+        
         public ActionResult CreateStories(StoriesModel model)
         {
             if (!ModelState.IsValid)
