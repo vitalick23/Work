@@ -1,12 +1,11 @@
 ﻿using UserStore.BLL.DTO;
 using UserStore.BLL.Infrastructure;
-using UserStore.DAL.Entities;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using System.Security.Claims;
 using UserStore.BLL.Interfaces;
-using UserStore.DAL.Interfaces;
 using System.Collections.Generic;
+using UserStore.BLL.Entities;
 
 namespace UserStore.BLL.Services
 {

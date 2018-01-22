@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using UserStore.DAL.Entities;
+using UserStore.BLL.Entities;
 
 namespace UserStore.DAL.EF
 {

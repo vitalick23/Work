@@ -1,5 +1,5 @@
-﻿using UserStore.DAL.Entities;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
+using UserStore.BLL.Entities;
 
 namespace UserStore.DAL.Identity
 {

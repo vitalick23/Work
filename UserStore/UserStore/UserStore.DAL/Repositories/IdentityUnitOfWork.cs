@@ -1,10 +1,11 @@
 ﻿using UserStore.DAL.EF;
-using UserStore.DAL.Entities;
-using UserStore.DAL.Interfaces;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Threading.Tasks;
 using UserStore.DAL.Identity;
+using UserStore.BLL.Interfaces;
+using UserStore.BLL.Entities;
+using Microsoft.AspNet.Identity;
 
 namespace UserStore.DAL.Repositories
 {
@@ -12,8 +13,8 @@ namespace UserStore.DAL.Repositories
     {
         private ApplicationContext db;
 
-        private ApplicationUserManager userManager;
-        private ApplicationRoleManager roleManager;
+        private UserManager<ApplicationUser> userManager;
+        private RoleManager<ApplicationRole> roleManager;
         private IClientManager clientManager;
 
         public IdentityUnitOfWork(string connectionString)
@@ -24,7 +25,7 @@ namespace UserStore.DAL.Repositories
             clientManager = new ClientManager(db);
         }
 
-        public ApplicationUserManager UserManager
+        public UserManager<ApplicationUser> UserManager
         {
             get { return userManager; }
         }
@@ -34,7 +35,7 @@ namespace UserStore.DAL.Repositories
             get { return clientManager; }
         }
 
-        public ApplicationRoleManager RoleManager
+        public RoleManager<ApplicationRole> RoleManager
         {
             get { return roleManager; }
         }

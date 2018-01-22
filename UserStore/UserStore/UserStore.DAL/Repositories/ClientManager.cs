@@ -1,6 +1,7 @@
-﻿using UserStore.DAL.EF;
-using UserStore.DAL.Entities;
-using UserStore.DAL.Interfaces;
+﻿using UserStore.BLL.Entities;
+using UserStore.BLL.Interfaces;
+using UserStore.DAL.EF;
+
 
 namespace UserStore.DAL.Repositories
 {
