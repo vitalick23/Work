@@ -33,7 +33,6 @@ namespace UserStore
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<IdentityUnitOfWork>().As<IUnitOfWork>().WithParameter("connectionString", "DefaultConnection");
             builder.RegisterType<ApplicationContext>();
-            builder.RegisterType<ClientManager>().As<IClientManager>();
             builder.RegisterType<ApplicationUserManager>().As<UserManager<ApplicationUser>>();
             builder.RegisterType<UserStore<ApplicationUser>>().As<IUserStore<ApplicationUser>>();
             builder.RegisterType<ApplicationUserManager>();

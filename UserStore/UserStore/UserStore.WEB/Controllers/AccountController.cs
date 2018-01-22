@@ -5,10 +5,9 @@ using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity.Owin;
 using System.Threading.Tasks;
 using UserStore.Models;
-using UserStore.BLL.DTO;
 using System.Security.Claims;
 using UserStore.BLL.Interfaces;
-using UserStore.BLL.Infrastructure;
+using UserStore.BLL.Entities;
 
 namespace UserStore.Controllers
 {
@@ -40,7 +39,7 @@ namespace UserStore.Controllers
           
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO { Email = model.Email, Password = model.Password};
+                ApplicationUser userDto = new ApplicationUser{ Email = model.Email, PasswordHash = model.Password};
                 ClaimsIdentity claim = await _userService.Authenticate(userDto);
                 if (claim == null)
                 {
@@ -78,19 +77,15 @@ namespace UserStore.Controllers
 
             if (ModelState.IsValid)
             {
-                UserDTO userDto = new UserDTO
+                ApplicationUser userDto = new ApplicationUser
                 {
                     Email = model.Email,
-                    Password = model.Password,
-                    Address = model.Address,
-                    Name = model.Name,
-                    Role = "user"
+                    PasswordHash = model.Password,
                 };
-                OperationDetails operationDetails = await _userService.Create(userDto);
-                if (operationDetails.Succedeed)
+                if( await _userService.Create(userDto))
                     return View("SuccessRegister");
                 else
-                    ModelState.AddModelError(operationDetails.Property, operationDetails.Message);
+                    ModelState.AddModelError("Error","Error");
             }
             return View(model);
         }

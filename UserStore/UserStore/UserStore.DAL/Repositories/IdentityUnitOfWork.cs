@@ -15,14 +15,12 @@ namespace UserStore.DAL.Repositories
 
         private UserManager<ApplicationUser> userManager;
         private RoleManager<ApplicationRole> roleManager;
-        private IClientManager clientManager;
-
+        
         public IdentityUnitOfWork(string connectionString)
         {
             db = new ApplicationContext(connectionString);
             userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
             roleManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(db));
-            clientManager = new ClientManager(db);
         }
 
         public UserManager<ApplicationUser> UserManager
@@ -30,10 +28,7 @@ namespace UserStore.DAL.Repositories
             get { return userManager; }
         }
 
-        public IClientManager ClientManager
-        {
-            get { return clientManager; }
-        }
+       
 
         public RoleManager<ApplicationRole> RoleManager
         {
@@ -60,7 +55,6 @@ namespace UserStore.DAL.Repositories
                 {
                     userManager.Dispose();
                     roleManager.Dispose();
-                    clientManager.Dispose();
                 }
                 this.disposed = true;
             }

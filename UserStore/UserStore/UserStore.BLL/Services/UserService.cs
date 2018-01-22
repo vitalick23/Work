@@ -1,6 +1,4 @@
-﻿using UserStore.BLL.DTO;
-using UserStore.BLL.Infrastructure;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using System.Security.Claims;
 using UserStore.BLL.Interfaces;
@@ -18,33 +16,33 @@ namespace UserStore.BLL.Services
             Database = uow;
         }
 
-        public async Task<OperationDetails> Create(UserDTO userDto)
+        public async Task<bool> Create(ApplicationUser userDto)
         {
             ApplicationUser user = await Database.UserManager.FindByEmailAsync(userDto.Email);
             if (user == null)
             {
                 user = new ApplicationUser { Email = userDto.Email, UserName = userDto.Email };
-                await Database.UserManager.CreateAsync(user, userDto.Password);
-                // добавляем роль
-                await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
-                // создаем профиль клиента
-                ClientProfile clientProfile = new ClientProfile { Id = user.Id, Address = userDto.Address, Name = userDto.Name };
-                Database.ClientManager.Create(clientProfile);
+                await Database.UserManager.CreateAsync(user, userDto.PasswordHash);
+                
+                //await Database.UserManager.AddToRoleAsync(user.Id, userDto.Role);
+                
+                //ClientProfile clientProfile = new ClientProfile { Id = user.Id, Address = userDto.Address, Name = userDto.Name };
+                //Database.ClientManager.Create(clientProfile);
                 await Database.SaveAsync();
-                return new OperationDetails(true, "Регистрация успешно пройдена", "");
+                return true;
 
             }
             else
             {
-                return new OperationDetails(false, "Пользователь с таким логином уже существует", "Email");
+                return false;
             }
         }
 
-        public async Task<ClaimsIdentity> Authenticate(UserDTO userDto)
+        public async Task<ClaimsIdentity> Authenticate(ApplicationUser userDto)
         {
             ClaimsIdentity claim = null;
             // находим пользователя
-            ApplicationUser user = await Database.UserManager.FindAsync(userDto.Email, userDto.Password);
+            ApplicationUser user = await Database.UserManager.FindAsync(userDto.Email, userDto.PasswordHash);
             // авторизуем его и возвращаем объект ClaimsIdentity
             if(user!=null)
                 claim= await Database.UserManager.CreateIdentityAsync(user,
@@ -53,7 +51,7 @@ namespace UserStore.BLL.Services
         }
 
         // начальная инициализация бд
-        public async Task SetInitialData(UserDTO adminDto, List<string> roles)
+        public async Task SetInitialData(ApplicationUser adminDto, List<string> roles)
         {
             foreach (string roleName in roles)
             {
